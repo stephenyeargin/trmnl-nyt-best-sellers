@@ -47,5 +47,13 @@ custom_fields:
   - Paperback Trade Fiction: trade-fiction-paperback
   - Young Adult Hardcover: young-adult-hardcover
   - Young Adult Paperback: young-adult-paperback-monthly
+- keyname: nyt_display
+  field_type: select
+  name: Display
+  description: How to show the books in the list
+  default: list
+  options:
+  - List with titles and descriptions: list
+  - Book Covers: covers
 name: New York Times Best Sellers
 refresh_interval: 1440

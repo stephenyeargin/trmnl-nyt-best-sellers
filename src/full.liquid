@@ -1,3 +1,4 @@
+{% if display == 'list' %}
 <div class="layout layout--row">
   <div class="" style="column-count: 2">
     {% for book in books limit: 10 %}
@@ -48,6 +49,19 @@
     {% endfor %}
   </div>
 </div>
+{% endif %}
+
+{% if display == 'covers' %}
+<div class="layout layout--row">
+  <div class="grid grid--cols-5 gap--medium">
+  {% for book in books limit: 10 %}
+    <div class="flex flex--column align--middle justify--center">
+      <img src="{{ book.book_image }}" width="125" class="image image-dither" style="object-fit: cover; filter: grayscale(1) contrast(1.2) brightness(1.1) saturate(0.8);" />
+    </div>
+  {% endfor %}
+  </div>
+</div>
+{% endif %}
 
 <div class="title_bar">
   <img class="image image-stroke" src="data:image/svg+xml;base64,{{ nyt_svg |  base64_encode }}" />
