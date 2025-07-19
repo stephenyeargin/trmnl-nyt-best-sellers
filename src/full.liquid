@@ -3,32 +3,47 @@
     {% for book in books limit: 10 %}
     <div class="item mb--2">
       <div class="meta w--5">
-    <span class="label label--small text-stroke">{{ book.rank }}</span>
+        <span class="label label--small text-stroke">{{ book.rank }}</span>
       </div>
+      {% if forloop.index == 1 %}
       <div class="content flex flex--row gap--medium">
-        {% if forloop.index == 1 %}
         <div class="w--36">
           <img src="{{ book.book_image }}" width="125" class="image image-dither" style="object-fit: cover; filter: grayscale(1) contrast(1.2) brightness(1.1) saturate(0.8);" />
         </div>
-        {% endif %}
-        <div class="flex flex--col flex--stretch-x">
-          {% if forloop.index == 1 %}
+        <div class="stretch">
           <div class="title title--medium clamp--3 clamp--nicely">{{ book.title }}</div>
-          <div class="label label--small">by {{ book.author }}</div>
-          {% else %}
-          <div class="label label--small label--underline">{{ book.title }} {{ book.contributor }}</div>
-          {% endif %}
-          {% if book.asterisk != 0 %}<div>*</div>{% endif %}
-          {% if book.dagger != 0 %}<div>&dagger;</div>{% endif %}
-          <div class="description clamp--2 clamp--nicely">
-            {% if book.description != blank %}
-            {{ book.description }}
-            {% else %}
-            Publisher: {{ book.publisher }}
-            {% endif %}
+          <div class="label label--small clamp--3 clamp--nicely">by {{ book.author }}</div>
+          <div class="stretch">
+            <span class="description clamp--4 clamp--nicely">
+              {% if book.asterisk != 0 %}*{% endif %}
+              {% if book.dagger != 0 %}&dagger;{% endif %}
+              {% if book.description != blank %}
+              {{ book.description }}
+              {% else %}
+              Publisher: {{ book.publisher }}
+              {% endif %}
+            </span>
           </div>
         </div>
       </div>
+      {% else %}
+      <div class="content flex flex--row gap--medium">
+        <div class="stretch">
+          <div><span class="label label--small label--underline">{{ book.title }} {{ book.contributor }}</span></div>
+          <div class="stretch">
+            <span class="description clamp--2 clamp--nicely">
+              {% if book.asterisk != 0 %}*{% endif %}
+              {% if book.dagger != 0 %}&dagger;{% endif %}
+              {% if book.description != blank %}
+              {{ book.description }}
+              {% else %}
+              Publisher: {{ book.publisher }}
+              {% endif %}
+            </span>
+          </div>
+        </div>
+      </div>
+      {% endif %}
     </div>
     {% endfor %}
   </div>

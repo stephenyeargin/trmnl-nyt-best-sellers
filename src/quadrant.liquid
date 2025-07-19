@@ -1,16 +1,20 @@
 <div class="layout layout--row">
-  <div class="" style="column-count: 1">
+  <div class="w--full" style="column-count: 1">
     {% for book in books limit: 5 %}
     <div class="item mb--1">
       <div class="meta w--5">
-    <span class="label label--small text-stroke">{{ book.rank }}</span>
+        <span class="label label--small text-stroke">{{ book.rank }}</span>
       </div>
       <div class="content flex flex--row flex--stretch align--middle gap--medium">
         <div class="">
           <div><span class="label label--small label--underline">{{ book.title }}</span></div>
-          <div><span class="description">{{ book.contributor }}</span></div>
-          {% if book.asterisk != 0 %}<div>*</div>{% endif %}
-          {% if book.dagger != 0 %}<div>&dagger;</div>{% endif %}
+          <div>
+            <span class="description">
+              {{ book.contributor }}
+              {% if book.asterisk != 0 %}*{% endif %}
+              {% if book.dagger != 0 %}&dagger;{% endif %}
+            </span>
+          </div>
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ watch:
 # values of custom fields (defined in src/settings.yml)
 custom_fields: {
   nyt_api_key: "{{ env.NYT_API_KEY }}",
-  nyt_book_list: graphic-books-and-manga
+  nyt_book_list: hardcover-nonfiction
 }
 
 # override variables

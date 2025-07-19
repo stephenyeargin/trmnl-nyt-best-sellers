@@ -14,10 +14,10 @@ custom_fields:
 - keyname: author_bio
   name: About This Plugin
   field_type: author_bio
-  description: "This is template text you should probably update \U0001F601"
-  github_url: https://github.com/
-  learn_more_url: https://usetrmnl.com/
-  email_address: email@example.com
+  description: "Display the latest New York Times Best Seller list for a given category."
+  github_url: https://github.com/stephenyeargin/trmnl-nyt-best-sellers
+  learn_more_url: https://www.nytimes.com/books/best-sellers/
+  email_address: stephen@yearg.in
 - keyname: nyt_api_key
   field_type: password
   name: API Key
