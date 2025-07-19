@@ -1,28 +1,51 @@
-#
-# Changes to this file will be overwritten by `trmnlp pull`.
-#
-# Docs: https://help.usetrmnl.com/en/articles/10542599-importing-and-exporting-private-plugins#h_581fb988f0
-#
 ---
 strategy: polling
 no_screen_padding: 'no'
 dark_mode: 'no'
 static_data: ''
 polling_verb: get
-polling_url: 'https://api.vercel.app/blog'
-polling_headers: 'content-type=application/json'
-name: Plugin Template
-refresh_interval: 1440
+polling_url: |
+  https://api.nytimes.com/svc/books/v3/lists/overview.json?api-key={{ nyt_api_key }}
+  https://api.nytimes.com/svc/books/v3/lists/current/{{ nyt_book_list }}.json?api-key={{ nyt_api_key }}
+polling_headers: content-type=application/json
+polling_body: 
+id: 121924
 custom_fields:
 - keyname: author_bio
   name: About This Plugin
   field_type: author_bio
-  description: This is template text you should probably update 😁
+  description: "This is template text you should probably update \U0001F601"
   github_url: https://github.com/
   learn_more_url: https://usetrmnl.com/
   email_address: email@example.com
-- keyname: example_string
-  field_type: string
-  name: A Configurable String
-  description: Save some data here for use in URLs or controlling the display
-  placeholder: An Example Value
+- keyname: nyt_api_key
+  field_type: password
+  name: API Key
+  description: <a href="https://developer.newyorktimes.com" class="underline">Obtain an API key</a> and enable the Books API.
+  placeholder: Abcdefg1234567890
+- keyname: nyt_book_list
+  field_type: select
+  name: Book List
+  description: The category of best sellers to display
+  default: hardcover-fiction
+  options:
+  - Advice, How-To & Miscellaneous: advice-how-to-and-miscellaneous
+  - Audio Fiction: audio-fiction
+  - Audio Nonfiction: audio-nonfiction
+  - Business: business-books
+  - Children's & Young Adult Series: series-books
+  - Children's Middle Grade Hardcover: childrens-middle-grade-hardcover
+  - Children's Picture Books: picture-books
+  - Combined Print & E-Book Fiction: combined-print-and-e-book-fiction
+  - Combined Print & E-Book Nonfiction: combined-print-and-e-book-nonfiction
+  - Graphic Books and Manga: graphic-books-and-manga
+  - Hardcover Fiction: hardcover-fiction
+  - Hardcover Nonfiction: hardcover-nonfiction
+  - Mass Market: mass-market-monthly
+  - Middle Grade Paperback: middle-grade-paperback-monthly
+  - Paperback Nonfiction: paperback-nonfiction
+  - Paperback Trade Fiction: trade-fiction-paperback
+  - Young Adult Hardcover: young-adult-hardcover
+  - Young Adult Paperback: young-adult-paperback-monthly
+name: New York Times Best Sellers
+refresh_interval: 1440

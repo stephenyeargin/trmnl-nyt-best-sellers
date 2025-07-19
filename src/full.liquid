@@ -1,17 +1,41 @@
-<div class="layout layout--row layout--top">
-  <div class="grid grid--cols-2 gap--medium">
-    <div class="item">
-      <div class="meta"></div>
-      <div class="content">
-        <div class="label label--medium">Full</div>
-        <div class="description">Replace me with your content!</div>
+<div class="layout layout--row">
+  <div class="" style="column-count: 2">
+    {% for book in books limit: 10 %}
+    <div class="item mb--2">
+      <div class="meta w--5">
+    <span class="label label--small text-stroke">{{ book.rank }}</span>
+      </div>
+      <div class="content flex flex--row gap--medium">
+        {% if forloop.index == 1 %}
+        <div class="w--36">
+          <img src="{{ book.book_image }}" width="125" class="image image-dither" style="object-fit: cover; filter: grayscale(1) contrast(1.2) brightness(1.1) saturate(0.8);" />
+        </div>
+        {% endif %}
+        <div class="flex flex--col flex--stretch-x">
+          {% if forloop.index == 1 %}
+          <div class="title title--medium clamp--3 clamp--nicely">{{ book.title }}</div>
+          <div class="label label--small">by {{ book.author }}</div>
+          {% else %}
+          <div class="label label--small label--underline">{{ book.title }} {{ book.contributor }}</div>
+          {% endif %}
+          {% if book.asterisk != 0 %}<div>*</div>{% endif %}
+          {% if book.dagger != 0 %}<div>&dagger;</div>{% endif %}
+          <div class="description clamp--2 clamp--nicely">
+            {% if book.description != blank %}
+            {{ book.description }}
+            {% else %}
+            Publisher: {{ book.publisher }}
+            {% endif %}
+          </div>
+        </div>
       </div>
     </div>
+    {% endfor %}
   </div>
 </div>
 
 <div class="title_bar">
-  <img class="image" src="https://usetrmnl.com/images/brand/glyphs/glyph--black.svg" />
-  <span class="title">Plugin Template</span>
+  <img class="image image-stroke" src="data:image/svg+xml;base64,{{ nyt_svg |  base64_encode }}" />
+  <span class="title">{{ list }} for {{ list_date | date: '%B %-d, %Y' }}</span>
   <span class="instance">{{ trmnl.plugin_settings.instance_name }}</span>
 </div>

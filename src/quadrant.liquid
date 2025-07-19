@@ -1,17 +1,24 @@
-<div class="layout layout--row layout--top">
-  <div class="grid grid--cols-1 gap--medium">
-    <div class="item">
-      <div class="meta"></div>
-      <div class="content">
-        <div class="label label--medium">Quadrant</div>
-        <div class="description">Replace me with your content!</div>
+<div class="layout layout--row">
+  <div class="" style="column-count: 1">
+    {% for book in books limit: 5 %}
+    <div class="item mb--1">
+      <div class="meta w--5">
+    <span class="label label--small text-stroke">{{ book.rank }}</span>
+      </div>
+      <div class="content flex flex--row flex--stretch align--middle gap--medium">
+        <div class="">
+          <div><span class="label label--small label--underline">{{ book.title }}</span></div>
+          <div><span class="description">{{ book.contributor }}</span></div>
+          {% if book.asterisk != 0 %}<div>*</div>{% endif %}
+          {% if book.dagger != 0 %}<div>&dagger;</div>{% endif %}
+        </div>
       </div>
     </div>
+    {% endfor %}
   </div>
 </div>
 
 <div class="title_bar">
-  <img class="image" src="https://usetrmnl.com/images/brand/glyphs/glyph--black.svg" />
-  <span class="title">Plugin Template</span>
-  <span class="instance">{{ trmnl.plugin_settings.instance_name }}</span>
+  <img class="image image-stroke" src="data:image/svg+xml;base64,{{ nyt_svg |  base64_encode }}" />
+  <span class="title">{{ list }} for {{ list_date | date: '%B %-d, %Y' }}</span>
 </div>
