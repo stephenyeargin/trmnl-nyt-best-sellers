@@ -4,6 +4,8 @@
 
 ![promo](assets/promo.png)
 
-### Screenshot
+### Screenshots
 
-![screenshot](assets/screenshot.png)
+![Cover View](assets/screenshot.png)
+
+![List View](assets/screenshot-2.png)
