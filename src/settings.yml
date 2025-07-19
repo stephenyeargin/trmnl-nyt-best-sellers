@@ -21,7 +21,7 @@ custom_fields:
 - keyname: nyt_api_key
   field_type: password
   name: API Key
-  description: <a href="https://developer.newyorktimes.com" class="underline">Obtain an API key</a> and enable the Books API.
+  description: <a href="https://developer.nytimes.com/" class="underline">Obtain an API key</a> and enable the Books API.
   placeholder: Abcdefg1234567890
 - keyname: nyt_book_list
   field_type: select
