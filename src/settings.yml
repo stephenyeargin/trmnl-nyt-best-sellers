@@ -51,9 +51,9 @@ custom_fields:
   field_type: select
   name: Display
   description: How to show the books in the list
-  default: list
+  default: covers
   options:
-  - List with titles and descriptions: list
+  - Lists with Descriptions: list
   - Book Covers: covers
 name: New York Times Best Sellers
 refresh_interval: 1440
