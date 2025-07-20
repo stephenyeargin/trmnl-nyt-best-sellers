@@ -55,8 +55,9 @@
 <div class="layout layout--row">
   <div class="grid grid--cols-5 gap--medium">
   {% for book in books limit: 10 %}
-    <div class="flex flex--column align--middle justify--center">
+    <div class="flex flex--column align--middle justify--center text--center" style="position:relative;">
       <img src="{{ book.book_image }}" width="125" class="image image-dither" style="object-fit: cover; filter: grayscale(1) contrast(1.2) brightness(1.1) saturate(0.8);" />
+      <div style="position: absolute; bottom: 2px; right: 2px;"><span class="label label--small label--inverted h--5" style="border: solid 2px #ffffff;">#{{ book.rank }}</span></div>
     </div>
   {% endfor %}
   </div>
