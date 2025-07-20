@@ -39,12 +39,9 @@ This project uses automated releases based on the `VERSION` file. To create a ne
 For local development and testing:
 
 ```bash
-# Install dependencies
-bundle install
-
-# Build the plugin
-bundle exec trmnlp build
+# Run development server
+./bin/dev
 
 # Push to TRMNL (requires API key configuration)
-bundle exec trmnlp push
+trmnlp push
 ```
