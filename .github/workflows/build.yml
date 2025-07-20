@@ -13,6 +13,7 @@ permissions:
 
 jobs:
   build:
+    name: Verify `trnmlp build` succeeds
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -27,10 +28,29 @@ jobs:
       - name: Run trmnlp build
         run: bundle exec trmnlp build
 
-  check-version:
-    needs: build
+  check-secret:
+    name: Check if `TRMNL_API_KEY` set
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    outputs:
+      has-secret: ${{ steps.check.outputs.has-secret }}
+    steps:
+      - name: Check if TRMNL_API_KEY secret exists
+        id: check
+        env:
+          TRMNL_API_KEY: ${{ secrets.TRMNL_API_KEY }}
+        run: |
+          if [ -n "$TRMNL_API_KEY" ]; then
+            echo "has-secret=true" >> $GITHUB_OUTPUT
+          else
+            echo "No configured TRMNL_API_KEY, stopping."
+            echo "has-secret=false" >> $GITHUB_OUTPUT
+          fi
+
+  check-version:
+    name: Check if VERSION is new
+    needs: [check-secret, build]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && needs.check-secret.outputs.has-secret == 'true'
     outputs:
       version: ${{ steps.version.outputs.version }}
       should-release: ${{ steps.check.outputs.should-release }}
@@ -66,9 +86,10 @@ jobs:
           fi
 
   create-release:
-    needs: check-version
+    name: Create a GitHub release
+    needs: [check-secret, check-version]
     runs-on: ubuntu-latest
-    if: needs.check-version.outputs.should-release == 'true'
+    if: needs.check-version.outputs.should-release == 'true' && needs.check-secret.outputs.has-secret == 'true'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -99,7 +120,7 @@ jobs:
           else
             echo "## Initial Release" > release_notes.md
             echo "" >> release_notes.md
-            echo "- Initial release of trmnl-nyt-best-sellers plugin" >> release_notes.md
+            echo "- Initial release of plugin" >> release_notes.md
           fi
           
           echo "Release notes generated:"
@@ -117,9 +138,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   deploy:
-    needs: [check-version, create-release]
+    name: Deploy to TRMNL
+    needs: [check-secret, check-version, create-release]
     runs-on: ubuntu-latest
-    if: success()
+    if: success() && needs.check-secret.outputs.has-secret == 'true'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
