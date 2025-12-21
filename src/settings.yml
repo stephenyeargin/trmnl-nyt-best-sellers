@@ -4,9 +4,7 @@ no_screen_padding: 'no'
 dark_mode: 'no'
 static_data: ''
 polling_verb: get
-polling_url: |
-  https://api.nytimes.com/svc/books/v3/lists/overview.json?api-key={{ nyt_api_key }}
-  https://api.nytimes.com/svc/books/v3/lists/current/{{ nyt_book_list }}.json?api-key={{ nyt_api_key }}
+polling_url: https://api.nytimes.com/svc/books/v3/lists/current/{{ nyt_book_list }}.json?api-key={{ nyt_api_key }}
 polling_headers: content-type=application/json
 polling_body: 
 id: 121924
@@ -14,7 +12,7 @@ custom_fields:
 - keyname: author_bio
   name: About This Plugin
   field_type: author_bio
-  description: "Display the latest New York Times Best Seller list for a given category."
+  description: Display the latest New York Times Best Seller list for a given category.
   github_url: https://github.com/stephenyeargin/trmnl-nyt-best-sellers
   learn_more_url: https://www.nytimes.com/books/best-sellers/
   email_address: stephen@yearg.in
