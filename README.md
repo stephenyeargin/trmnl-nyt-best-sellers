@@ -1,6 +1,6 @@
 # New York Times Best Sellers for TRMNL
 
-[![Build and Deploy](https://github.com/stephenyeargin/trmnl-nyt-best-sellers/actions/workflows/build.yml/badge.svg)](https://github.com/stephenyeargin/trmnl-nyt-best-sellers/actions/workflows/build.yml)
+[![Build and Deploy](https://github.com/stephenyeargin/trmnl-nyt-best-sellers/actions/workflows/build.yml/badge.svg)](https://github.com/stephenyeargin/trmnl-nyt-best-sellers/actions/workflows/build.yml) [![TRMNL Recipe Connections](https://trmnl-badges.gohk.xyz/badge/connections?recipe=121924)](https://trmnl.com/recipes/121924)
 
 ![promo](assets/promo.png)
 
