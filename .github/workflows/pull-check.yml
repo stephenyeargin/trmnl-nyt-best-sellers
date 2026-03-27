@@ -34,7 +34,7 @@ jobs:
           EOF
 
       - name: Run trmnlp pull
-        run: trmnlp pull
+        run: trmnlp pull --force
 
       - name: Fail on repository changes
         run: |
