@@ -1,0 +1,52 @@
+name: Verify trmnlp pull is clean
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pull-check:
+    name: Run trmnlp pull and verify no diffs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+
+      - name: Install trmnlp
+        run: gem install trmnl_preview
+
+      - name: Create trmnlp config directory
+        run: mkdir -p ~/.config/trmnlp
+
+      - name: Create trmnlp config file
+        run: |
+          cat > ~/.config/trmnlp/config.yml << EOF
+          ---
+          api_key: ${{ secrets.TRMNL_API_KEY }}
+          EOF
+
+      - name: Run trmnlp pull
+        run: trmnlp pull
+
+      - name: Fail on repository changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Detected file changes after trmnlp pull."
+            echo ""
+            echo "Changed files:"
+            git status --short
+            echo ""
+            echo "Diff:"
+            git --no-pager diff
+            exit 1
+          fi
+
+          echo "No file changes detected after trmnlp pull."
