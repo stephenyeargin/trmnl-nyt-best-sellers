@@ -14,6 +14,7 @@ custom_fields:
 - keyname: author_bio
   name: About This Plugin
   field_type: author_bio
+  category: news
   description: Display the latest New York Times Best Seller list for a given category.
   github_url: https://github.com/stephenyeargin/trmnl-nyt-best-sellers
   learn_more_url: https://www.nytimes.com/books/best-sellers/
