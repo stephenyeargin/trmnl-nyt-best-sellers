@@ -4,7 +4,7 @@ no_screen_padding: 'no'
 dark_mode: 'no'
 static_data: ''
 polling_verb: get
-framework_version: 2.3.7
+framework_version: latest
 serverless_language: 
 polling_url: https://api.nytimes.com/svc/books/v3/lists/current/{{ nyt_book_list }}.json?api-key={{ nyt_api_key }}
 polling_headers: content-type=application/json
