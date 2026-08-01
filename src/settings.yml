@@ -57,5 +57,5 @@ custom_fields:
   - Full List: list
   - Book Covers: covers
 name: New York Times Best Sellers
-description: Current New York Times best seller lists
+description: Top-ranked books this week
 refresh_interval: 1440
